@@ -44,7 +44,7 @@ const LandingWide = (props) => (
 
       <LeftLandingSubText>
         <Fade delay={4000} direction='down' triggerOnce={true}>
-            <SubTitle>Stats & CS</SubTitle>
+            <SubTitle>Math, CS & Stats</SubTitle>
         </Fade>
         
         <Fade delay={4800}direction='down' triggerOnce={true}>

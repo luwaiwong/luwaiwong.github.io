@@ -47,7 +47,7 @@ const LandingTall = (props) => (
             <SubTitle>Developer</SubTitle>
         </Fade>
         <Fade delay={4800} direction='down' triggerOnce={true}>
-            <SubTitle>Stats & CS</SubTitle>
+              <SubTitle>Math, CS & Stats</SubTitle>
         </Fade>
         
       </LeftLandingSubTextTall>

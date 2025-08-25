@@ -10,7 +10,7 @@ export const ProjectHeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1vw;
-  margin-top: 1h;
+  margin-top: 1vh;
   margin-bottom: -5vh;
 
   position: relative;
@@ -23,7 +23,7 @@ export const ProjectSubtitle = styled.div`
   margin-right: 13vw;
 
   position: absolute;
-  top: -2vw;
+  top: 0vw;
   right: 0;
 
   font-family: ${REGULAR_FONT};
@@ -128,7 +128,7 @@ export const ProjectTitle = styled.h3`
   color: ${colors.TEXT};
 
   position: absolute;
-  top: -2vh;
+  top: 0vh;
   left: 1vw;
 
   opacity: 0;
@@ -237,9 +237,9 @@ export const ProjectEndText = styled.a`
 
   position: relative;
 
-  width: 37vw;
+  width: 41vw;
   height: 100%;
-  margin-bottom: 2vw;
+  margin-bottom: 3vw;
 
   padding: 2vw;
 

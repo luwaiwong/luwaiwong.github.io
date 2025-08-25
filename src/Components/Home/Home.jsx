@@ -29,7 +29,7 @@ const background = {
 
 const Home = (props) => (
   <>
-    <SideMenu/>
+    {/* <SideMenu/> */}
     <Links/>
         
     {/* INTRO SECTION */}

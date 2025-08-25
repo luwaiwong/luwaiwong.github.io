@@ -16,6 +16,7 @@ import {
 import { useMediaQuery } from "react-responsive";
 
 import "./App.css";
+import ScrollToTop from "./utils/ScrollToTop";
 
 export default function App() {
   return (
@@ -24,13 +25,14 @@ export default function App() {
         @import
         url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Space+Mono&display=swap');
         @import
+        url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap')
+        @import
         url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
       </style>
-
+      <ScrollToTop/>
       <Routes>
-        <Route path="/" element={<CaseComp />} />
-        <Route path="/casecomp" element={<CaseComp />} />
-        <Route path="*" element={<CaseComp />} />
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );

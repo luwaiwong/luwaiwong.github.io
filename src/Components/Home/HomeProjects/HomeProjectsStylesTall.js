@@ -116,7 +116,7 @@ export const ProjectTitle = styled.h3`
   color: ${colors.TEXT};
 
   position: absolute;
-  top: -1vh;
+  top: 1vh;
   left: 2vw;
 
   opacity: 0;
@@ -154,6 +154,7 @@ export const ProjectText = styled.div`
   position: absolute;
   top: 8vh;
   margin: 1vh;
+  margin-left: 2vw;
 
   opacity: 0;
   transition: 0.4s;
@@ -227,8 +228,8 @@ export const ProjectEndText = styled.a`
 
   position: relative;
 
-  width: 88vw;
-  height: 10vh;
+  width: 92vw;
+  height: 15vh;
   margin-bottom: 2vw;
   margin-left: 3vw;
 

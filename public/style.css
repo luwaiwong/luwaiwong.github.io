@@ -6,7 +6,8 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
     animation-name: body;
-    animation-duration: 10s;
+    animation-duration: 12s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes body {
