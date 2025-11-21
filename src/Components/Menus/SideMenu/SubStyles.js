@@ -41,7 +41,7 @@ export const SideMenuButton = styled.a`
 `;
 
 export const MenuBackground = styled.div`
-  background-color: ${colors.BACKGROUND_DARK};
+  background-color: ${colors.BACKGROUND_LIGHT};
 
   position: fixed;
   right: ${(props) => (props.visible ? "-250vw" : "0vw")};

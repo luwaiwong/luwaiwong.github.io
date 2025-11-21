@@ -1,9 +1,12 @@
-export const LIGHT_BLUE = "#81A1C1";
-export const DARK_BLUE = "#5E81AC";
-export const LIGHT_YELLOW = "#FFEEDD";
-export const DARK_YELLOW = "#FDD85D";
-export const RED = "#cc293c";
+// Modern minimal color palette - black, blue, grey (no gradients)
+export const BACKGROUND = "#0A0A0A";
+export const BACKGROUND_LIGHT = "#1A1A1A";
+export const BACKGROUND_CARD = "#1F1F1F";
 
-export const BACKGROUND = "#2E3440";
-export const BACKGROUND_DARK = "#3B4252";
-export const TEXT = "#D8DEE9";
+export const TEXT = "#FFFFFF";
+export const TEXT_MUTED = "#A0A0A0";
+
+export const ACCENT = "#4A9EFF";
+export const ACCENT_HOVER = "#3A8EEF";
+
+export const BORDER = "#2A2A2A";
