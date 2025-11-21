@@ -5,6 +5,7 @@ import SideMenu from "../Menus/SideMenu/SideMenu.jsx"
 import Landing from './Landing Page/Landing.jsx'
 import HomeProjects from './HomeProjects/HomeProjects.jsx'
 import About from './About/About.jsx'
+import Contact from './Contact/Contact.jsx'
 import * as colors from '../../colors.js'
 
 import { BufferSection, Section, SeperationLine, UnderConstructionText } from "./HomeStyles.js"
@@ -31,21 +32,16 @@ const Home = (props) => (
   <>
     {/* <SideMenu/> */}
     <Links/>
-        
+
     {/* INTRO SECTION */}
     <Landing/>
-    
+
     <About/>
-    
+
     <BufferSection/>
     <HomeProjects/>
-    
-    {/* Under Construction Section */}
-    {/* <div style={background} id='Section3'>
-      <UnderConstructionText> 🚧 under construction 🚧</UnderConstructionText>
-    </div> */}
 
-
+    <Contact/>
   </>
 );
 
