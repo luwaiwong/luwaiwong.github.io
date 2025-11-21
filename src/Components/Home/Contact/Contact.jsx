@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import { Icon } from '@iconify/react';
 import * as colors from '../../../colors.js';
-import * as links from '../../../links.js';
 
 const ContactContainer = styled.section`
   min-height: 60vh;
@@ -13,7 +11,6 @@ const ContactContainer = styled.section`
   align-items: center;
   padding: 6rem 8vw;
   position: relative;
-  text-align: center;
 
   @media (max-width: 768px) {
     padding: 4rem 6vw;
@@ -22,67 +19,91 @@ const ContactContainer = styled.section`
 `;
 
 const SectionTitle = styled(motion.h2)`
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
   font-weight: 600;
   color: ${colors.TEXT};
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
 `;
 
 const Description = styled(motion.p)`
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
   color: ${colors.TEXT_MUTED};
-  margin-bottom: 3rem;
-  max-width: 600px;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  text-align: center;
 `;
 
-const EmailLink = styled(motion.a)`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+const Form = styled(motion.form)`
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Input = styled.input`
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: ${colors.TEXT};
+  background: ${colors.BACKGROUND_CARD};
+  border: 1px solid ${colors.BORDER};
+  border-radius: 8px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${colors.ACCENT};
+  }
+
+  &::placeholder {
+    color: ${colors.TEXT_MUTED};
+  }
+`;
+
+const TextArea = styled.textarea`
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: ${colors.TEXT};
+  background: ${colors.BACKGROUND_CARD};
+  border: 1px solid ${colors.BORDER};
+  border-radius: 8px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${colors.ACCENT};
+  }
+
+  &::placeholder {
+    color: ${colors.TEXT_MUTED};
+  }
+`;
+
+const SubmitButton = styled.button`
+  padding: 0.75rem 2rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: ${colors.ACCENT};
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border: 2px solid ${colors.ACCENT};
-  border-radius: 50px;
+  color: ${colors.BACKGROUND};
+  background: ${colors.ACCENT};
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
+  font-family: inherit;
 
   &:hover {
-    background: ${colors.ACCENT};
-    color: ${colors.BACKGROUND};
+    background: ${colors.ACCENT_HOVER};
     transform: translateY(-2px);
   }
 
-  svg {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0.75rem 1.5rem;
-  }
-`;
-
-const SocialLinks = styled(motion.div)`
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 3rem;
-`;
-
-const SocialLink = styled.a`
-  color: ${colors.TEXT_MUTED};
-  font-size: 1.8rem;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    color: ${colors.ACCENT};
-    transform: translateY(-2px);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
 
@@ -90,12 +111,13 @@ const Footer = styled(motion.footer)`
   text-align: center;
   padding: 2rem 8vw;
   color: ${colors.TEXT_MUTED};
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   border-top: 1px solid ${colors.BORDER};
+  margin-top: 4rem;
 
   @media (max-width: 768px) {
     padding: 1.5rem 6vw;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 `;
 
@@ -123,6 +145,27 @@ const itemVariants = {
 };
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Open email client with pre-filled data
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    window.location.href = `mailto:luwaiwong@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <>
       <ContactContainer id="contact">
@@ -131,57 +174,44 @@ const Contact = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
+          style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
           <SectionTitle variants={itemVariants}>
             Get In Touch
           </SectionTitle>
 
           <Description variants={itemVariants}>
-            I'm always open to new opportunities, collaborations, or just a friendly chat about tech.
+            Feel free to reach out for opportunities, collaborations, or just to chat about tech.
           </Description>
 
-          <EmailLink
-            href="mailto:luwaiwong@gmail.com"
-            variants={itemVariants}
-          >
-            <Icon icon="mdi:email-outline" />
-            luwaiwong@gmail.com
-          </EmailLink>
-
-          <SocialLinks variants={itemVariants}>
-            <SocialLink
-              href={links.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="GitHub"
-            >
-              <Icon icon="mdi:github" />
-            </SocialLink>
-            <SocialLink
-              href={links.linkedinLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
-            >
-              <Icon icon="mdi:linkedin" />
-            </SocialLink>
-            <SocialLink
-              href={links.twitterLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Twitter/X"
-            >
-              <Icon icon="akar-icons:x-fill" />
-            </SocialLink>
-            <SocialLink
-              href={links.instagramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Instagram"
-            >
-              <Icon icon="ri:instagram-line" />
-            </SocialLink>
-          </SocialLinks>
+          <Form variants={itemVariants} onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <TextArea
+              name="message"
+              placeholder="Message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            />
+            <SubmitButton type="submit">
+              Send Message
+            </SubmitButton>
+          </Form>
         </motion.div>
       </ContactContainer>
 
