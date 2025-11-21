@@ -7,21 +7,11 @@ import * as links from '../../../links.js';
 
 const ProjectsContainer = styled.section`
   min-height: 100vh;
-  padding: 6rem 0;
+  padding: 6rem 8vw;
   position: relative;
-  width: 100%;
 
   @media (max-width: 768px) {
-    padding: 4rem 0;
-  }
-`;
-
-const TitleContainer = styled.div`
-  padding: 0 8vw;
-  margin-bottom: 3rem;
-
-  @media (max-width: 768px) {
-    padding: 0 6vw;
+    padding: 4rem 6vw;
   }
 `;
 
@@ -29,6 +19,7 @@ const SectionTitle = styled(motion.h2)`
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 600;
   color: ${colors.TEXT};
+  margin-bottom: 3rem;
   position: relative;
   display: inline-block;
 
@@ -44,50 +35,49 @@ const SectionTitle = styled(motion.h2)`
 `;
 
 const ProjectsGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 `;
 
 const ProjectCard = styled(motion.a)`
   background: ${colors.BACKGROUND_CARD};
-  border-top: 1px solid ${colors.BORDER};
+  border: 1px solid ${colors.BORDER};
+  border-radius: 16px;
   text-decoration: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 100%;
   overflow: hidden;
+  min-height: 500px;
 
   &:hover {
-    background: ${colors.BACKGROUND_LIGHT};
+    border-color: ${colors.ACCENT};
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(74, 158, 255, 0.15);
   }
 
-  &:last-child {
-    border-bottom: 1px solid ${colors.BORDER};
-  }
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+    min-height: 450px;
   }
 `;
 
 const ProjectImageContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 280px;
   background: ${colors.BACKGROUND_LIGHT};
   position: relative;
   overflow: hidden;
 
-  @media (max-width: 1024px) {
-    height: 300px;
-  }
-
   @media (max-width: 768px) {
-    height: 250px;
+    height: 220px;
   }
 `;
 
@@ -99,23 +89,27 @@ const ProjectImagePlaceholder = styled.div`
   justify-content: center;
   background: linear-gradient(135deg, ${colors.BACKGROUND_LIGHT} 0%, ${colors.BACKGROUND_CARD} 100%);
   color: ${colors.TEXT_MUTED};
-  font-size: 3rem;
+  font-size: 4rem;
   transition: transform 0.3s ease;
 
   ${ProjectCard}:hover & {
     transform: scale(1.05);
   }
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const ProjectContent = styled.div`
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
+  gap: 1rem;
+  flex: 1;
 
   @media (max-width: 768px) {
-    padding: 2rem 6vw;
+    padding: 1.5rem;
   }
 `;
 
@@ -135,7 +129,7 @@ const ProjectHeader = styled.div`
 `;
 
 const ProjectTitle = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: 1.5rem;
   font-weight: 600;
   color: ${colors.TEXT};
   margin: 0;
@@ -159,16 +153,18 @@ const ProjectLink = styled.a`
 `;
 
 const ProjectDescription = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: ${colors.TEXT_MUTED};
   line-height: 1.7;
   margin: 0;
+  flex: 1;
 `;
 
 const ProjectTags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
 `;
 
 const Tag = styled.span`
@@ -178,14 +174,6 @@ const Tag = styled.span`
   padding: 0.25rem 0.75rem;
   border-radius: 4px;
   border: 1px solid ${colors.BORDER};
-`;
-
-const ViewMoreContainer = styled.div`
-  padding: 3rem 8vw;
-
-  @media (max-width: 768px) {
-    padding: 2rem 6vw;
-  }
 `;
 
 const ViewMoreLink = styled(motion.a)`
@@ -271,25 +259,16 @@ const HomeProjects = () => {
 
   return (
     <ProjectsContainer id="projects">
-      <TitleContainer>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <SectionTitle>
-            Featured Projects
-          </SectionTitle>
-        </motion.div>
-      </TitleContainer>
-
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
+        <SectionTitle variants={itemVariants}>
+          Featured Projects
+        </SectionTitle>
+
         <ProjectsGrid>
           {projects.map((project, index) => (
             <ProjectCard
@@ -342,22 +321,17 @@ const HomeProjects = () => {
             </ProjectCard>
           ))}
         </ProjectsGrid>
-      </motion.div>
 
-      <ViewMoreContainer>
         <ViewMoreLink
           href={links.githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          variants={itemVariants}
         >
           View more on GitHub
           <Icon icon="mdi:arrow-right" />
         </ViewMoreLink>
-      </ViewMoreContainer>
+      </motion.div>
     </ProjectsContainer>
   );
 };

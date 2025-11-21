@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { Icon } from '@iconify/react';
@@ -10,7 +10,6 @@ const Nav = styled(motion.nav)`
   position: fixed;
   top: 1rem;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 1000;
   max-width: 900px;
   width: calc(100% - 4rem);
@@ -111,11 +110,9 @@ const SocialLink = styled.a`
 const Links = () => {
   const location = useLocation();
   const [isCompact, setIsCompact] = useState(false);
-  const { scrollY } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
-      // Make compact after scrolling 100px
       setIsCompact(window.scrollY > 100);
     };
 
@@ -125,8 +122,9 @@ const Links = () => {
 
   return (
     <Nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: -100, x: '-50%', opacity: 0 }}
+      animate={{ y: 0, x: '-50%', opacity: 1 }}
+      style={{ x: '-50%' }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <NavContent $compact={isCompact}>
